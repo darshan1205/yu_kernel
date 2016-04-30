@@ -151,6 +151,9 @@ config CPU_FREQ_DEFAULT_GOV_DESPAIR
 	select CPU_FREQ_GOV_DESPAIR
 	help
 
+config CPU_FREQ_DEFAULT_GOV_DARKNESS
+ 	bool "darkness"
+ 	select CPU_FREQ_GOV_DARKNESS
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -317,6 +320,9 @@ config CPU_BOOST
 	  - Migration of important threads from one CPU to another.
 
 	  If in doubt, say N.
+
+config CPU_FREQ_GOV_DARKNESS
+	tristate "'darkness' cpufreq policy governor"
 
 config GENERIC_CPUFREQ_CPU0
 	tristate "Generic CPU0 cpufreq driver"

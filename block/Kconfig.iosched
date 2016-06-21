@@ -90,7 +90,21 @@ config IOSCHED_FIOPS
 	  This is an IOPS based I/O scheduler. It will try to distribute
           IOPS equally among all processes in the system. It's mainly for
           Flash based storage.
-		  
+
+config IOSCHED_SIO
+	tristate "Simple I/O (SIO) scheduler"
+	default y
+	---help---
+	  The simple I/O scheduler is based on noop, deadline, and v(r) I/O
+	  schedulers.
+
+	  This algorithm does not do any kind of sorting, as it is aimed for
+	  aleatory access devices, but it does some basic merging. We try to
+	  keep minimum overhead to achieve low latency.
+
+	  Asynchronous and synchronous requests are not treated separately, but
+	  we rely on deadlines to ensure fairness.
+	
 choice
 	prompt "Default I/O scheduler"
 	default DEFAULT_CFQ
@@ -124,11 +138,14 @@ choice
 		  any workload. It also tries to guarantee low latency to
 		  interactive and soft real-time applications.
 
-	config DEFAULT_FIOPS
+        config DEFAULT_FIOPS
 		bool "FIOPS" if IOSCHED_FIOPS=y
 
 	config DEFAULT_NOOP
 		bool "No-op"
+
+	config DEFAULT_SIO
+		bool "SIO" if IOSCHED_SIO=y
 
 endchoice
 
@@ -140,6 +157,7 @@ config DEFAULT_IOSCHED
 	default "bfq" if DEFAULT_BFQ
 	default "fiops" if DEFAULT_FIOPS
 	default "noop" if DEFAULT_NOOP
+	default "sio" if DEFAULT_SIO 
 
 endmenu
 

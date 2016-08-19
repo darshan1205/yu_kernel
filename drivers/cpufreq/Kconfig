@@ -131,6 +131,11 @@ config CPU_FREQ_DEFAULT_GOV_SMARTMAX
 	help
 	  Use the CPUFreq governor 'smartmax' as default
 
+config CPU_FREQ_DEFAULT_GOV_ALUCARD
+  bool "alucard"
+  select CPU_FREQ_GOV_ALUCARD
+  help
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -229,6 +234,10 @@ config CPU_FREQ_GOV_PMC
   select CPU_FREQ_TABLE	
   help	
     'smartmax' tweaked for absolute battery
+
+config CPU_FREQ_GOV_ALUCARD
+	tristate "'alucard' cpufreq governor"
+	depends on CPU_FREQ
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"

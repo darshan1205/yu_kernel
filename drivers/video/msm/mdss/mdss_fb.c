@@ -732,6 +732,7 @@ static DEVICE_ATTR(always_on, S_IRUGO | S_IWUSR | S_IWGRP,
 	mdss_fb_get_doze_mode, mdss_fb_set_doze_mode);
 static DEVICE_ATTR(msm_fb_panel_status, S_IRUGO,
 	mdss_fb_get_panel_status, NULL);
+
 static DEVICE_ATTR(idle_pc, S_IRUGO | S_IWUSR | S_IWGRP, mdss_fb_get_idle_pc, mdss_fb_set_idle_pc);
 
 static struct attribute *mdss_fb_attrs[] = {
